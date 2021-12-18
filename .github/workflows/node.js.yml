@@ -31,5 +31,5 @@ jobs:
     - name: Run Test
       run: npm test
     - name: Run Lint
-      run: eslint . --ext .js,.jsx,.ts,.tsx
+      run: npm run lint
     
