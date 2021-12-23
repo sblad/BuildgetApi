@@ -1,6 +1,10 @@
-import { PrimaryGeneratedColumn, Column } from 'typeorm';
+import { CreateStageDto } from './../dtos/createStageDto';
+import { PrimaryGeneratedColumn, Column, Entity, BaseEntity } from 'typeorm';
+import { BadRequestException } from '@nestjs/common';
+import { Exclude } from 'class-transformer';
 
-export class Stage {
+@Entity()
+export class Stage extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -11,5 +15,20 @@ export class Stage {
   type: string;
 
   @Column()
-  steps: string[];
+  @Exclude()
+  userId: number;
+
+  apply(createStageDto: CreateStageDto) {
+    this.name = createStageDto.name;
+    this.type = createStageDto.type;
+    this.userId = createStageDto.userId;
+  }
+
+  checkEligibility(userStages: Stage[], type: string) {
+    const isAlreadyCreated = !!userStages.find((stage) => stage.type === type);
+
+    if (isAlreadyCreated) {
+      throw new BadRequestException('Stage already exists');
+    }
+  }
 }
