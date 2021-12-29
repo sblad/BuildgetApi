@@ -35,7 +35,7 @@ export class StageService {
     const stage = new Stage();
 
     stage.checkEligibility(userStages, createStageDto.type);
-    stage.apply(createStageDto);
+    stage.create(createStageDto);
     stage.save();
 
     return stage;

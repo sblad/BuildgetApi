@@ -8,4 +8,8 @@ export class UpdateStageDto {
   @IsString()
   @IsOptional()
   type: string;
+
+  @IsString()
+  @IsOptional()
+  status: 'created' | 'inprogress' | 'completed';
 }

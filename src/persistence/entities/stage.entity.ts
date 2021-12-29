@@ -1,5 +1,12 @@
+import { Step } from './step.entity';
 import { CreateStageDto } from './../dtos/createStageDto';
-import { PrimaryGeneratedColumn, Column, Entity, BaseEntity } from 'typeorm';
+import {
+  PrimaryGeneratedColumn,
+  Column,
+  Entity,
+  BaseEntity,
+  OneToMany,
+} from 'typeorm';
 import { BadRequestException } from '@nestjs/common';
 import { Exclude } from 'class-transformer';
 
@@ -18,10 +25,17 @@ export class Stage extends BaseEntity {
   @Exclude()
   userId: number;
 
-  apply(createStageDto: CreateStageDto) {
+  @Column()
+  status: 'created' | 'inprogress' | 'completed';
+
+  @OneToMany(() => Step, (step) => step.stage)
+  steps: Step[];
+
+  create(createStageDto: CreateStageDto) {
     this.name = createStageDto.name;
     this.type = createStageDto.type;
     this.userId = createStageDto.userId;
+    this.status = 'created';
   }
 
   checkEligibility(userStages: Stage[], type: string) {
