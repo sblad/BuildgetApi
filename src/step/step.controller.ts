@@ -1,3 +1,4 @@
+import { UpdateStepDto } from './../persistence/dtos/updateStepDto';
 import { CreateStepDto } from './../persistence/dtos/createStepDto';
 import { StepService } from './step.service';
 import {
@@ -39,7 +40,7 @@ export class StepController {
   updateStage(
     @Req() req,
     @Param('id', ParseIntPipe) id: number,
-    @Body() updateStepDto: any,
+    @Body() updateStepDto: UpdateStepDto,
   ) {
     const userId = req.user.id;
 

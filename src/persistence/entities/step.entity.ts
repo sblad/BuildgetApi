@@ -1,3 +1,4 @@
+import { Contractor } from './contractor.entity';
 import { UpdateStepDto } from './../dtos/updateStepDto';
 import { Exclude } from 'class-transformer';
 import { Stage } from 'src/persistence/entities/stage.entity';
@@ -7,7 +8,6 @@ import {
   Entity,
   BaseEntity,
   ManyToOne,
-  JoinTable,
 } from 'typeorm';
 import { CreateStepDto } from '../dtos/createStepDto';
 
@@ -20,9 +20,6 @@ export class Step extends BaseEntity {
   name: string;
 
   @Column()
-  contractor: string;
-
-  @Column()
   estimate: number;
 
   @Column()
@@ -30,15 +27,20 @@ export class Step extends BaseEntity {
   userId: number;
 
   @ManyToOne(() => Stage, (stage) => stage.steps, { eager: true })
-  @JoinTable()
   stage: Stage;
 
-  create(createStepDto: CreateStepDto, stage: Stage) {
+  @ManyToOne(() => Contractor, (contractor) => contractor.steps)
+  contractor: Contractor;
+
+  create(createStepDto: CreateStepDto, stage: Stage, contractor?: Contractor) {
     this.name = createStepDto.name;
-    this.contractor = createStepDto.contractor;
     this.estimate = createStepDto.estimate;
     this.userId = createStepDto.userId;
     this.stage = stage;
+
+    if (contractor) {
+      this.contractor = contractor;
+    }
   }
 
   update(updateStepDto: UpdateStepDto) {

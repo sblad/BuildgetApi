@@ -5,6 +5,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UpdateStepDto } from 'src/persistence/dtos/updateStepDto';
 import { Stage } from 'src/persistence/entities/stage.entity';
+import { Contractor } from 'src/persistence/entities/contractor.entity';
 
 @Injectable()
 export class StepService {
@@ -13,6 +14,8 @@ export class StepService {
     private readonly stepRepository: Repository<Step>,
     @InjectRepository(Stage)
     private readonly stageRepository: Repository<Stage>,
+    @InjectRepository(Contractor)
+    private readonly contractorRepository: Repository<Contractor>,
   ) {}
 
   findAll(userId: number) {
@@ -27,7 +30,11 @@ export class StepService {
       throw new BadRequestException('Stage not found');
     }
 
-    step.create(createStepDto, stage);
+    const contractor = await this.contractorRepository.findOne(
+      createStepDto.contractorId,
+    );
+
+    step.create(createStepDto, stage, contractor);
     step.save();
 
     return step;
