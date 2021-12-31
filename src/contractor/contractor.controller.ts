@@ -5,6 +5,7 @@ import {
   Body,
   ClassSerializerInterceptor,
   Controller,
+  Delete,
   Get,
   Param,
   ParseIntPipe,
@@ -55,5 +56,12 @@ export class ContractorController {
     const userId = req.user.id;
 
     return this.contractorService.update(updateContractorDto, id, userId);
+  }
+
+  @Delete('delete/:id')
+  removeContractor(@Req() req, @Param('id', ParseIntPipe) id: number) {
+    const userId = req.user.id;
+
+    this.contractorService.remove(id, userId);
   }
 }

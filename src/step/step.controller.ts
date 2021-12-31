@@ -5,6 +5,7 @@ import {
   Body,
   ClassSerializerInterceptor,
   Controller,
+  Delete,
   Get,
   Param,
   ParseIntPipe,
@@ -30,7 +31,7 @@ export class StepController {
   }
 
   @Post()
-  createStage(@Req() req, @Body() createStepDto: CreateStepDto) {
+  createStep(@Req() req, @Body() createStepDto: CreateStepDto) {
     const userId = req.user.id;
 
     return this.stepService.create({ ...createStepDto, userId });
@@ -45,5 +46,12 @@ export class StepController {
     const userId = req.user.id;
 
     return this.stepService.update(updateStepDto, id, userId);
+  }
+
+  @Delete('delete/:id')
+  removeStage(@Req() req, @Param('id', ParseIntPipe) id: number) {
+    const userId = req.user.id;
+
+    this.stepService.remove(id, userId);
   }
 }

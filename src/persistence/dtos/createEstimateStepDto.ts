@@ -1,17 +1,16 @@
 import { IsNumber, IsOptional, IsString } from 'class-validator';
 
-export class CreateStepDto {
+export class CreateEstimateStepDto {
   @IsString()
-  name: string;
+  description: string;
 
   @IsNumber()
-  @IsOptional()
-  contractorId: number;
-
-  @IsNumber()
-  stageId: number;
+  price: number;
 
   @IsNumber()
   @IsOptional()
   userId: number;
+
+  @IsNumber()
+  estimateId: number;
 }

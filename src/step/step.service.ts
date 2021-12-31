@@ -30,12 +30,13 @@ export class StepService {
       throw new BadRequestException('Stage not found');
     }
 
-    const contractor = await this.contractorRepository.findOne(
-      createStepDto.contractorId,
-    );
+    const contractor = await this.contractorRepository.findOne({
+      id: createStepDto.contractorId,
+      userId: createStepDto.userId,
+    });
 
     step.create(createStepDto, stage, contractor);
-    step.save();
+    await step.save();
 
     return step;
   }
@@ -58,7 +59,7 @@ export class StepService {
     }
 
     step.update(updateStepDto);
-    step.save();
+    await step.save();
 
     return step;
   }

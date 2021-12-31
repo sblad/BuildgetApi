@@ -7,6 +7,7 @@ import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { StepModule } from './step/step.module';
 import { ContractorModule } from './contractor/contractor.module';
+import { EstimateModule } from './estimate/estimate.module';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import { ContractorModule } from './contractor/contractor.module';
     UsersModule,
     StepModule,
     ContractorModule,
+    EstimateModule,
   ],
   controllers: [AppController],
   providers: [AppService],

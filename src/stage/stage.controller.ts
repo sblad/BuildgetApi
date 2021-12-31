@@ -4,6 +4,7 @@ import {
   Body,
   ClassSerializerInterceptor,
   Controller,
+  Delete,
   Get,
   Param,
   ParseIntPipe,
@@ -43,7 +44,7 @@ export class StageController {
     return this.stageService.create({ ...createStageDto, userId });
   }
 
-  @Post('delete/:id')
+  @Delete('delete/:id')
   removeStage(@Req() req, @Param('id', ParseIntPipe) id: number) {
     const userId = req.user.id;
 
