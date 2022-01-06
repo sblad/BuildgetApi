@@ -7,8 +7,6 @@ export class TypeOrmConfigService implements TypeOrmOptionsFactory {
   constructor(private configService: ConfigService) {}
 
   createTypeOrmOptions(): TypeOrmModuleOptions {
-    const x = this.configService.get('password');
-
     return {
       type: this.configService.get('type') as any,
       host: this.configService.get('host'),
