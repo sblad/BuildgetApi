@@ -1,9 +1,9 @@
-import { CreateContractorDto } from './../persistence/dtos/createContractorDto';
+import { CreateContractorDto } from '../persistence/dtos/createContractor.dto';
 import { Contractor } from './../persistence/entities/contractor.entity';
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { UpdateContractorDto } from 'src/persistence/dtos/updateContractorDto';
+import { UpdateContractorDto } from 'src/persistence/dtos/updateContractor.dto';
 
 @Injectable()
 export class ContractorService {

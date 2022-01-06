@@ -14,7 +14,10 @@ export class EstimateService {
   ) {}
 
   findAll(userId: number, stepId: number) {
-    return this.estimateRepository.find({ userId, id: stepId });
+    return this.estimateRepository.find({
+      relations: ['step', 'estimateSteps'],
+      where: { step: { id: stepId }, userId: userId },
+    });
   }
 
   async create(userId: number, stepId: number) {

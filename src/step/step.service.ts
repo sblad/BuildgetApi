@@ -1,9 +1,9 @@
-import { CreateStepDto } from './../persistence/dtos/createStepDto';
+import { CreateStepDto } from '../persistence/dtos/createStep.dto';
 import { Step } from './../persistence/entities/step.entity';
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { UpdateStepDto } from 'src/persistence/dtos/updateStepDto';
+import { UpdateStepDto } from 'src/persistence/dtos/updateStep.dto';
 import { Stage } from 'src/persistence/entities/stage.entity';
 import { Contractor } from 'src/persistence/entities/contractor.entity';
 

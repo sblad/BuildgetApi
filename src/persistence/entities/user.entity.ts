@@ -1,6 +1,8 @@
 import { IsEmail } from 'class-validator';
 import { Exclude } from 'class-transformer';
 
+import { ApiHideProperty } from '@nestjs/swagger';
+
 import * as bcrypt from 'bcrypt';
 
 import {
@@ -23,10 +25,12 @@ export class User extends BaseEntity {
 
   @Column()
   @Exclude()
+  @ApiHideProperty()
   password: string;
 
   @Column()
   @Exclude()
+  @ApiHideProperty()
   salt: string;
 
   async validatePassword(password: string): Promise<boolean> {

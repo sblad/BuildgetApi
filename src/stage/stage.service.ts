@@ -1,8 +1,8 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { CreateStageDto } from 'src/persistence/dtos/createStageDto';
-import { FindStageDto } from 'src/persistence/dtos/findStageDto';
-import { UpdateStageDto } from 'src/persistence/dtos/updateStageDto';
+import { CreateStageDto } from 'src/persistence/dtos/createStage.dto';
+import { FindStageDto } from 'src/persistence/dtos/findStage.dto';
+import { UpdateStageDto } from 'src/persistence/dtos/updateStage.dto';
 import { Stage } from 'src/persistence/entities/stage.entity';
 import { Repository } from 'typeorm';
 

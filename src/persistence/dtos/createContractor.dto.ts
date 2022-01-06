@@ -1,3 +1,4 @@
+import { ApiHideProperty } from '@nestjs/swagger';
 import { IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class CreateContractorDto {
@@ -9,5 +10,6 @@ export class CreateContractorDto {
 
   @IsNumber()
   @IsOptional()
+  @ApiHideProperty()
   userId: number;
 }

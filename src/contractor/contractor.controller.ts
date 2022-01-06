@@ -1,5 +1,5 @@
-import { UpdateContractorDto } from './../persistence/dtos/updateContractorDto';
-import { CreateContractorDto } from './../persistence/dtos/createContractorDto';
+import { UpdateContractorDto } from '../persistence/dtos/updateContractor.dto';
+import { CreateContractorDto } from '../persistence/dtos/createContractor.dto';
 import { ContractorService } from './contractor.service';
 import {
   Body,
@@ -16,10 +16,12 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/guards/jwt.auth-guard';
+import { ApiTags } from '@nestjs/swagger';
 
 @Controller('contractor')
 @UseGuards(JwtAuthGuard)
 @UseInterceptors(ClassSerializerInterceptor)
+@ApiTags('Contractor')
 export class ContractorController {
   constructor(private readonly contractorService: ContractorService) {}
 
@@ -58,7 +60,7 @@ export class ContractorController {
     return this.contractorService.update(updateContractorDto, id, userId);
   }
 
-  @Delete('delete/:id')
+  @Delete(':id')
   removeContractor(@Req() req, @Param('id', ParseIntPipe) id: number) {
     const userId = req.user.id;
 

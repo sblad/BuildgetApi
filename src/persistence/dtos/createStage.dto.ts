@@ -1,5 +1,7 @@
 import { IsNumber, IsString, IsOptional } from 'class-validator';
 
+import { ApiHideProperty } from '@nestjs/swagger';
+
 export class CreateStageDto {
   @IsString()
   name: string;
@@ -9,5 +11,6 @@ export class CreateStageDto {
 
   @IsNumber()
   @IsOptional()
+  @ApiHideProperty()
   userId: number;
 }

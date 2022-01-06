@@ -1,4 +1,5 @@
 import { IsNumber, IsOptional, IsString } from 'class-validator';
+import { ApiHideProperty } from '@nestjs/swagger';
 
 export class CreateStepDto {
   @IsString()
@@ -13,5 +14,6 @@ export class CreateStepDto {
 
   @IsNumber()
   @IsOptional()
+  @ApiHideProperty()
   userId: number;
 }

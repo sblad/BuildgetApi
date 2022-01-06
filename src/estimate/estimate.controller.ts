@@ -1,4 +1,5 @@
-import { CreateEstimateStepDto } from './../persistence/dtos/createEstimateStepDto';
+import { ApiTags } from '@nestjs/swagger';
+import { CreateEstimateStepDto } from '../persistence/dtos/createEstimateStep.dto';
 import { EstimateService } from './estimate.service';
 import {
   Body,
@@ -25,6 +26,7 @@ export class EstimateController {
     private readonly estimateStepService: EstimateStepService,
   ) {}
 
+  @ApiTags('Estimate')
   @Get(':stepId')
   findAll(@Req() req, @Param('stepId', ParseIntPipe) stepId: number) {
     const userId = req.user.id;
@@ -32,6 +34,7 @@ export class EstimateController {
     return this.estimateService.findAll(userId, stepId);
   }
 
+  @ApiTags('Estimate Step')
   @Get('step/:estimateId')
   findAllSteps(
     @Req() req,
@@ -42,6 +45,7 @@ export class EstimateController {
     return this.estimateStepService.findAll(userId, estimateId);
   }
 
+  @ApiTags('Estimate')
   @Post()
   createEstimate(@Req() req, @Body() body) {
     const userId = req.user.id;
@@ -49,6 +53,7 @@ export class EstimateController {
     return this.estimateService.create(userId, body.stepId);
   }
 
+  @ApiTags('Estimate Step')
   @Post('step')
   createStep(@Req() req, @Body() createEstimateStepDto: CreateEstimateStepDto) {
     const userId: number = req.user.id;
@@ -59,6 +64,7 @@ export class EstimateController {
     });
   }
 
+  @ApiTags('Estimate')
   @Delete('delete/:id')
   removeEstimate(@Req() req, @Param('id', ParseIntPipe) id: number) {
     const userId = req.user.id;
@@ -66,6 +72,7 @@ export class EstimateController {
     this.estimateService.remove(id, userId);
   }
 
+  @ApiTags('Estimate Step')
   @Delete('step/:id')
   removeEstimateStep(@Req() req, @Param('id', ParseIntPipe) id: number) {
     const userId = req.user.id;

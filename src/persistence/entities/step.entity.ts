@@ -1,6 +1,6 @@
 import { Estimate } from './estimate.entity';
 import { Contractor } from './contractor.entity';
-import { UpdateStepDto } from './../dtos/updateStepDto';
+import { UpdateStepDto } from '../dtos/updateStep.dto';
 import { Exclude } from 'class-transformer';
 import { Stage } from 'src/persistence/entities/stage.entity';
 import {
@@ -12,7 +12,7 @@ import {
   OneToOne,
   JoinColumn,
 } from 'typeorm';
-import { CreateStepDto } from '../dtos/createStepDto';
+import { CreateStepDto } from '../dtos/createStep.dto';
 
 @Entity()
 export class Step extends BaseEntity {
@@ -31,6 +31,7 @@ export class Step extends BaseEntity {
   estimate: Estimate;
 
   @ManyToOne(() => Stage, (stage) => stage.steps, { eager: true })
+  @Exclude()
   stage: Stage;
 
   @ManyToOne(() => Contractor, (contractor) => contractor.steps, {

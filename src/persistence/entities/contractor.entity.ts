@@ -1,3 +1,4 @@
+import { ApiHideProperty } from '@nestjs/swagger';
 import { Step } from './step.entity';
 import {
   PrimaryGeneratedColumn,
@@ -6,7 +7,7 @@ import {
   BaseEntity,
   OneToMany,
 } from 'typeorm';
-import { CreateContractorDto } from '../dtos/createContractorDto';
+import { CreateContractorDto } from '../dtos/createContractor.dto';
 import { Exclude } from 'class-transformer';
 
 @Entity()
@@ -22,9 +23,11 @@ export class Contractor extends BaseEntity {
 
   @Column()
   @Exclude()
+  @ApiHideProperty()
   userId: number;
 
   @OneToMany(() => Step, (step) => step.contractor)
+  @ApiHideProperty()
   steps: Step[];
 
   create(createContractorDto: CreateContractorDto) {

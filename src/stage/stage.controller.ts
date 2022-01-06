@@ -1,5 +1,5 @@
-import { UpdateStageDto } from './../persistence/dtos/updateStageDto';
-import { CreateStageDto } from './../persistence/dtos/createStageDto';
+import { UpdateStageDto } from '../persistence/dtos/updateStage.dto';
+import { CreateStageDto } from '../persistence/dtos/createStage.dto';
 import {
   Body,
   ClassSerializerInterceptor,
@@ -16,10 +16,12 @@ import {
 } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/guards/jwt.auth-guard';
 import { StageService } from './stage.service';
+import { ApiTags } from '@nestjs/swagger';
 
 @Controller('stage')
 @UseGuards(JwtAuthGuard)
 @UseInterceptors(ClassSerializerInterceptor)
+@ApiTags('Stage')
 export class StageController {
   constructor(private readonly stageService: StageService) {}
 
@@ -44,7 +46,7 @@ export class StageController {
     return this.stageService.create({ ...createStageDto, userId });
   }
 
-  @Delete('delete/:id')
+  @Delete(':id')
   removeStage(@Req() req, @Param('id', ParseIntPipe) id: number) {
     const userId = req.user.id;
 

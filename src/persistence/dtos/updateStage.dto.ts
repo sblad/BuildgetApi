@@ -1,3 +1,4 @@
+import { StageStatus } from './../entities/stage.entity';
 import { IsString, IsOptional } from 'class-validator';
 
 export class UpdateStageDto {
@@ -11,5 +12,5 @@ export class UpdateStageDto {
 
   @IsString()
   @IsOptional()
-  status: 'created' | 'inprogress' | 'completed';
+  status: StageStatus;
 }

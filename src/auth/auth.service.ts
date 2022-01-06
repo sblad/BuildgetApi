@@ -2,7 +2,7 @@ import { JwtPayload } from './jwt/jwt.types';
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
-import { AuthCredentialsDto } from 'src/persistence/dtos/authCredentialsDto.dto';
+import { AuthCredentialsDto } from 'src/persistence/dtos/authCredentials.dto';
 import { User } from 'src/persistence/entities/user.entity';
 
 @Injectable()

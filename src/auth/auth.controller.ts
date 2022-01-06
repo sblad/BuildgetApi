@@ -7,9 +7,11 @@ import {
   UseInterceptors,
   ValidationPipe,
 } from '@nestjs/common';
-import { AuthCredentialsDto } from 'src/persistence/dtos/authCredentialsDto.dto';
+import { AuthCredentialsDto } from 'src/persistence/dtos/authCredentials.dto';
 import { User } from 'src/persistence/entities/user.entity';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('User')
 @Controller('auth')
 export class AuthController {
   constructor(private authService: AuthService) {}
@@ -23,9 +25,7 @@ export class AuthController {
   }
 
   @Post('/signin')
-  signIn(
-    @Body(ValidationPipe) authCredentialsDto: AuthCredentialsDto,
-  ): Promise<{ accessToken: string }> {
+  signIn(@Body(ValidationPipe) authCredentialsDto: AuthCredentialsDto) {
     return this.authService.login(authCredentialsDto);
   }
 }

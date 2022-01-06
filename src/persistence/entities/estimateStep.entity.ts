@@ -7,7 +7,7 @@ import {
   ManyToOne,
 } from 'typeorm';
 import { Exclude } from 'class-transformer';
-import { CreateEstimateStepDto } from '../dtos/createEstimateStepDto';
+import { CreateEstimateStepDto } from '../dtos/createEstimateStep.dto';
 
 @Entity()
 export class EstimateStep extends BaseEntity {
