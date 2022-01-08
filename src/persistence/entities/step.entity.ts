@@ -23,6 +23,12 @@ export class Step extends BaseEntity {
   name: string;
 
   @Column()
+  beginDate: Date;
+
+  @Column()
+  endDate: Date;
+
+  @Column()
   @Exclude()
   userId: number;
 
@@ -42,6 +48,8 @@ export class Step extends BaseEntity {
   create(createStepDto: CreateStepDto, stage: Stage, contractor?: Contractor) {
     this.name = createStepDto.name;
     this.userId = createStepDto.userId;
+    this.beginDate = createStepDto.beginDate;
+    this.endDate = createStepDto.endDate;
     this.stage = stage;
 
     if (contractor) {

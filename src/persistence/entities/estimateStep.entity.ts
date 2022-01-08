@@ -21,6 +21,9 @@ export class EstimateStep extends BaseEntity {
   price: number;
 
   @Column()
+  type: EstimateType;
+
+  @Column()
   @Exclude()
   userId: number;
 
@@ -36,5 +39,12 @@ export class EstimateStep extends BaseEntity {
     this.userId = createEstimateStepDto.userId;
     this.price = createEstimateStepDto.price;
     this.estimateId = createEstimateStepDto.estimateId;
+    this.type = createEstimateStepDto.type;
   }
+}
+
+export enum EstimateType {
+  Material = 'material',
+  Work = 'work',
+  Other = 'other',
 }

@@ -1,4 +1,5 @@
-import { IsNumber, IsOptional, IsString } from 'class-validator';
+import { IsEnum, IsNumber, IsOptional, IsString } from 'class-validator';
+import { EstimateType } from '../entities/estimateStep.entity';
 
 export class CreateEstimateStepDto {
   @IsString()
@@ -13,4 +14,7 @@ export class CreateEstimateStepDto {
 
   @IsNumber()
   estimateId: number;
+
+  @IsEnum(EstimateType)
+  type: EstimateType;
 }
